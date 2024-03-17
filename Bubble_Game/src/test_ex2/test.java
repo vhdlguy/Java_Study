@@ -40,10 +40,20 @@ public class test extends JFrame{
 	}
 	
 	private class aboutListner implements ActionListener{
+		
+		int[] score = new int[5];
+		
+				
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()==about) {
+				for(int i=0; i<5; i++) {
+					score[i]=i*10;
+				}
 				System.out.println("이 프로그램은 시험용입니다");
+				for(int i=0; i<5; i++) {
+					System.out.printf("Score[%d] = %d",i,score[i]);
+				}
 			}
 		}
 	}
