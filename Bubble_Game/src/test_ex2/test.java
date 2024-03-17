@@ -43,7 +43,7 @@ public class test extends JFrame{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()==about) {
-				System.out.println("This Progam is ...");
+				System.out.println("이 프로그램은 시험용입니다");
 			}
 		}
 	}
