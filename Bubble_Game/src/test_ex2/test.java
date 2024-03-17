@@ -11,16 +11,15 @@ import java.awt.event.MouseEvent;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-
-
 public class test extends JFrame{
 	JMenuItem eventTestItem;
-	JMenu about = new JMenu("이프로그램은");
-
+	JMenuItem about; 
+	
 	private JButton button,button2;
 	boolean swap=true;
 	/**
@@ -42,17 +41,25 @@ public class test extends JFrame{
 	private class aboutListner implements ActionListener{
 		
 		int[] score = new int[5];
-		
-				
+						
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if(e.getSource()==about) {
+				
+				JFrame window = new JFrame();
+				window.setBounds(800, 100, 400, 300);
+				JPanel panel1 = new JPanel();			    
+                window.add(panel1);
+                window.setVisible(true);
+                				
+				panel1.add(new JLabel("<html> 이 프로그램은 시험용입니다 <br> Why I do not <br>  </html>"));
+				//panel1.add(new JLabel("<html> Why I do not <br>  </html>"));
 				for(int i=0; i<5; i++) {
 					score[i]=i*10;
 				}
-				System.out.println("이 프로그램은 시험용입니다");
+				
 				for(int i=0; i<5; i++) {
-					System.out.printf("Score[%d] = %d",i,score[i]);
+					System.out.printf("Score[%d] = %d %n",i,score[i]);
 				}
 			}
 		}
@@ -75,17 +82,15 @@ public class test extends JFrame{
 				
 			} else if(e.getSource()==eventTestItem) {
 				System.out.println("Execute Event Test Menu");
-			}
+			} 
 		}
 	}
 	
 	private class MyMouseAdapter extends MouseAdapter{
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			button2.setForeground(Color.red);
-			
+			button2.setForeground(Color.red);			
 			button2.setText(Integer.toString(e.getClickCount()));
-		
 			
 			//button2.setBorderPainted(false);
 			
@@ -120,7 +125,7 @@ public class test extends JFrame{
 		
 		panel.add(button);
 		panel.add(button2);
-		this.add(panel);
+		this.add(panel);		
 		//this.setVisible(true);
 	}
 	
@@ -128,15 +133,15 @@ public class test extends JFrame{
 		JMenuBar mb = new JMenuBar();
 		JMenu fileMenu = new JMenu("파일");
 		JMenu editMenu = new JMenu("수정");
+		JMenu aboutMenu = new JMenu("정보");
 		
 		
 		fileMenu.add(new JMenuItem("New"));
 		fileMenu.add(new JMenuItem("Open"));
-		fileMenu.add(new JMenuItem("Close"));
-		
-		fileMenu.addSeparator(); //분리선 
+		fileMenu.add(new JMenuItem("Close"));		
+		fileMenu.addSeparator(); //분리선		
 		eventTestItem = new JMenuItem("Event Test", KeyEvent.VK_E);
-		fileMenu.add(eventTestItem);
+		fileMenu.add(eventTestItem);	
 		eventTestItem.addActionListener(new MyListener());
 		fileMenu.addSeparator(); //분리선
 		JMenu submenu = new JMenu("서브메뉴");
@@ -144,10 +149,15 @@ public class test extends JFrame{
 		submenu.add(new JMenuItem("Sub Menu 1"));
 		submenu.add(new JMenuItem("Sub Menu 2"));
 		
+		about = new JMenuItem("이 프로그램");
+		about.addActionListener(new aboutListner());
+		aboutMenu.add(about);
+		
 		mb.add(fileMenu);
 		mb.add(editMenu);
-		mb.add(about);
-		about.addActionListener(new aboutListner());
+		mb.add(aboutMenu);
+		
+		
 		/**
 		 * 메뉴바 붙이
 		 */
